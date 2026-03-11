@@ -1,0 +1,74 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Combined Microphone + Calculator Icon with Sound Wave -->
+  <defs>
+    <!-- Neon Blue Gradient -->
+    <linearGradient id="neonBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f3ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0066ff;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Purple Gradient -->
+    <linearGradient id="neonPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#bf00ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7b00ff;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow Filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- AI Circuit Pattern -->
+    <pattern id="circuitPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1" fill="#00f3ff" opacity="0.3"/>
+      <path d="M10 0 L10 8 M10 12 L10 20 M0 10 L8 10 M12 10 L20 10" stroke="#00f3ff" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background Circle with Glassmorphism -->
+  <circle cx="30" cy="30" r="28" fill="rgba(0, 243, 255, 0.05)" stroke="url(#neonBlue)" stroke-width="1.5" filter="url(#glow)"/>
+  
+  <!-- AI Circuit Pattern Inside Circle -->
+  <circle cx="30" cy="30" r="25" fill="url(#circuitPattern)" opacity="0.2"/>
+  
+  <!-- Microphone Body (Calculator Shape) -->
+  <rect x="20" y="15" width="20" height="22" rx="3" fill="url(#neonBlue)" opacity="0.9" filter="url(#glow)"/>
+  
+  <!-- Calculator Display Screen -->
+  <rect x="23" y="18" width="14" height="6" rx="1" fill="rgba(0, 0, 0, 0.6)" stroke="#00f3ff" stroke-width="0.5"/>
+  
+  <!-- Calculator Buttons Grid -->
+  <circle cx="25" cy="28" r="1.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="30" cy="28" r="1.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="35" cy="28" r="1.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="25" cy="32" r="1.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="30" cy="32" r="1.2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="35" cy="32" r="1.2" fill="#ffffff" opacity="0.8"/>
+  
+  <!-- Microphone Top (Sound Wave Lines) -->
+  <path d="M24 12 L24 8" stroke="url(#neonPurple)" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M30 11 L30 6" stroke="url(#neonPurple)" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M36 12 L36 8" stroke="url(#neonPurple)" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+  
+  <!-- Sound Wave Arcs Around Microphone -->
+  <path d="M18 25 C14 25 12 28 12 30" stroke="url(#neonPurple)" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6" filter="url(#glow)"/>
+  <path d="M42 25 C46 25 48 28 48 30" stroke="url(#neonPurple)" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6" filter="url(#glow)"/>
+  
+  <!-- Outer Sound Wave Rings -->
+  <ellipse cx="30" cy="30" rx="32" ry="26" stroke="#bf00ff" stroke-width="0.8" fill="none" opacity="0.2" filter="url(#glow)"/>
+  <ellipse cx="30" cy="30" rx="36" ry="30" stroke="#00f3ff" stroke-width="0.5" fill="none" opacity="0.15" filter="url(#glow)"/>
+  
+  <!-- EchoCalc Text -->
+  <text x="75" y="38" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="url(#neonBlue)" filter="url(#glow)">EchoCalc</text>
+  
+  <!-- AI Badge -->
+  <text x="155" y="35" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="url(#neonPurple)">AI</text>
+  
+  <!-- Accent Dots -->
+  <circle cx="70" cy="42" r="1.5" fill="#00f3ff" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="145" cy="32" r="1" fill="#bf00ff" opacity="0.8" filter="url(#glow)"/>
+</svg>

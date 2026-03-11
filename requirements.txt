@@ -1,0 +1,4 @@
+Flask==3.0.0
+SymPy==1.12
+pyttsx3==2.90
+SpeechRecognition==3.10.0

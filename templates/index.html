@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoCalc – Voice Powered AI Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated gradient background -->
+    <div class="background-animation"></div>
+    
+    <!-- Main container -->
+    <div class="container">
+        <!-- Calculator -->
+        <div class="calculator glass-panel">
+            <!-- Header -->
+            <div class="calculator-header">
+                <div class="logo-container">
+                    <img src="/static/logo.svg" alt="EchoCalc Logo" class="logo">
+                </div>
+                
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                        <svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                        <svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                    <button class="history-toggle" id="historyToggle" title="View history">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Display Screen -->
+            <div class="display-container">
+                <div class="display" id="display">
+                    <div class="expression" id="expression"></div>
+                    <div class="result" id="result">0</div>
+                </div>
+            </div>
+            
+            <!-- Control Buttons -->
+            <div class="control-buttons">
+                <button class="btn-control btn-voice" id="voiceBtn" title="Voice input">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>
+                    </svg>
+                    <span class="voice-wave"></span>
+                </button>
+                <button class="btn-control btn-clear" id="clearBtn" title="Clear all">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+                <button class="btn-control btn-backspace" id="backspaceBtn" title="Backspace">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/>
+                        <line x1="18" y1="9" x2="12" y2="15"/>
+                        <line x1="12" y1="9" x2="18" y2="15"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Calculator Buttons Grid -->
+            <div class="button-grid">
+                <!-- Row 1 -->
+                <button class="btn btn-operator" data-value="(">(</button>
+                <button class="btn btn-operator" data-value=")">)</button>
+                <button class="btn btn-operator" data-value="%">%</button>
+                <button class="btn btn-operator" data-value="/">÷</button>
+                
+                <!-- Row 2 -->
+                <button class="btn btn-number" data-value="7">7</button>
+                <button class="btn btn-number" data-value="8">8</button>
+                <button class="btn btn-number" data-value="9">9</button>
+                <button class="btn btn-operator" data-value="*">×</button>
+                
+                <!-- Row 3 -->
+                <button class="btn btn-number" data-value="4">4</button>
+                <button class="btn btn-number" data-value="5">5</button>
+                <button class="btn btn-number" data-value="6">6</button>
+                <button class="btn btn-operator" data-value="-">−</button>
+                
+                <!-- Row 4 -->
+                <button class="btn btn-number" data-value="1">1</button>
+                <button class="btn btn-number" data-value="2">2</button>
+                <button class="btn btn-number" data-value="3">3</button>
+                <button class="btn btn-operator" data-value="+">+</button>
+                
+                <!-- Row 5 -->
+                <button class="btn btn-number" data-value="0">0</button>
+                <button class="btn btn-number" data-value=".">.</button>
+                <button class="btn btn-equals" id="equalsBtn">=</button>
+                <button class="btn btn-function" data-value="**">x^y</button>
+            </div>
+            
+            <!-- Voice Status Indicator -->
+            <div class="voice-status" id="voiceStatus">
+                <div class="status-indicator"></div>
+                <span class="status-text">Listening...</span>
+            </div>
+        </div>
+        
+        <!-- History Sidebar -->
+        <div class="history-sidebar glass-panel" id="historySidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Calculation History
+                </h2>
+                <button class="close-sidebar" id="closeHistory">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="history-actions">
+                <button class="btn-small btn-danger" id="clearHistory">
+                    <svg class="icon-small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                    Clear History
+                </button>
+            </div>
+            
+            <div class="history-list" id="historyList">
+                <!-- History items will be loaded here -->
+                <div class="loading-history">Loading history...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
