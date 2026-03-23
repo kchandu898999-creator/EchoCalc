@@ -31,6 +31,12 @@
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                         </svg>
                     </button>
+                    <button class="author-toggle" id="authorToggle" title="Author details">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </button>
                     <button class="history-toggle" id="historyToggle" title="View history">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -109,7 +115,50 @@
                 <span class="status-text">Listening...</span>
             </div>
         </div>
+         
         
+        <!-- Author Sidebar -->
+        <div class="author-sidebar glass-panel" id="authorSidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    Author Details
+                </h2>
+                <button class="close-sidebar" id="closeAuthor">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="author-content">
+                <div class="author-avatar">
+                    <svg class="avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+                
+                <div class="author-info">
+                    <div class="info-label">Name</div>
+                    <div class="info-value">Chandu Kalahasti</div>
+                </div>
+                
+                <div class="author-info">
+                    <div class="info-label">Email</div>
+                    <a href="mailto:kchandu898999@gmail.com" class="info-email">kchandu898999@gmail.com</a>
+                </div>
+                
+                <div class="author-footer">
+                    <div class="footer-badge">Developer</div>
+                    <div class="footer-badge">AI Expert</div>
+                </div>
+            </div>
+        </div>
+
         <!-- History Sidebar -->
         <div class="history-sidebar glass-panel" id="historySidebar">
             <div class="sidebar-header">
@@ -142,9 +191,13 @@
         </div>
     </div>
     
+    <!-- Overlay for sidebars -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
     <!-- Toast Notifications -->
     <div class="toast-container" id="toastContainer"></div>
     
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
 </body>
 </html>

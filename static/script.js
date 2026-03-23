@@ -18,9 +18,17 @@ const buttons = {
     backspace: document.getElementById('backspaceBtn'),
     voice: document.getElementById('voiceBtn'),
     theme: document.getElementById('themeToggle'),
+    authorToggle: document.getElementById('authorToggle'),
+    closeAuthor: document.getElementById('closeAuthor'),
     historyToggle: document.getElementById('historyToggle'),
     closeHistory: document.getElementById('closeHistory'),
     clearHistory: document.getElementById('clearHistory')
+};
+
+const sidebars = {
+    author: document.getElementById('authorSidebar'),
+    history: document.getElementById('historySidebar'),
+    overlay: document.getElementById('sidebarOverlay')
 };
 
 // Voice Recognition State
@@ -117,6 +125,21 @@ function initializeButtons() {
         });
     }
     
+    // Author toggle
+    if (buttons.authorToggle) {
+        buttons.authorToggle.addEventListener('click', () => {
+            playClickSound();
+            toggleAuthorSidebar();
+        });
+    }
+    
+    if (buttons.closeAuthor) {
+        buttons.closeAuthor.addEventListener('click', () => {
+            playClickSound();
+            closeAuthorSidebar();
+        });
+    }
+    
     // History toggle
     if (buttons.historyToggle) {
         buttons.historyToggle.addEventListener('click', () => {
@@ -138,8 +161,22 @@ function initializeButtons() {
         });
     }
     
+    // Overlay click handler
+    if (sidebars.overlay) {
+        sidebars.overlay.addEventListener('click', () => {
+            closeAllSidebars();
+        });
+    }
+    
     // Keyboard support
     document.addEventListener('keydown', handleKeyboard);
+    
+    // Close sidebars on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeAllSidebars();
+        }
+    });
 }
 
 // Expression Management
@@ -411,18 +448,92 @@ function toggleTheme() {
     showToast(`${newTheme.charAt(0).toUpperCase() + newTheme.slice(1)} mode`, 'success');
 }
 
+// Author Sidebar Management
+function toggleAuthorSidebar() {
+    if (!sidebars.author) return;
+    
+    // Close history if it's open
+    if (sidebars.history && sidebars.history.classList.contains('open')) {
+        sidebars.history.classList.remove('open');
+    }
+    
+    sidebars.author.classList.toggle('open');
+    
+    // Toggle overlay
+    if (sidebars.overlay) {
+        if (sidebars.author.classList.contains('open')) {
+            sidebars.overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        } else {
+            sidebars.overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+}
+
+function closeAuthorSidebar() {
+    if (!sidebars.author) return;
+    sidebars.author.classList.remove('open');
+    if (sidebars.overlay) {
+        sidebars.overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
 // History Management
 function toggleHistoryPanel() {
     if (!sidebar.element) return;
+    
+    // Close author sidebar if it's open
+    if (sidebars.author && sidebars.author.classList.contains('open')) {
+        sidebars.author.classList.remove('open');
+    }
+    
     sidebar.element.classList.toggle('open');
+    
+    // Toggle overlay
+    if (sidebars.overlay) {
+        if (sidebar.element.classList.contains('open')) {
+            sidebars.overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        } else {
+            sidebars.overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
 }
 
 function openHistory() {
+    // Close author sidebar if it's open
+    if (sidebars.author && sidebars.author.classList.contains('open')) {
+        sidebars.author.classList.remove('open');
+    }
     sidebar.element.classList.add('open');
+    if (sidebars.overlay) {
+        sidebars.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeHistory() {
     sidebar.element.classList.remove('open');
+    if (sidebars.overlay) {
+        sidebars.overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function closeAllSidebars() {
+    if (sidebars.author) {
+        sidebars.author.classList.remove('open');
+    }
+    if (sidebar.element) {
+        sidebar.element.classList.remove('open');
+    }
+    if (sidebars.overlay) {
+        sidebars.overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 }
 
 function saveCalculation(expression, result) {
