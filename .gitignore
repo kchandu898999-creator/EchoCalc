@@ -1,0 +1,66 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Python egg
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+# Distribution / packaging
+.Python
+env/
+*.egg-info/
+.eggs/
+
+# VS Code
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# git
+.git/
+
+# History and storage
+history.json
+
+# Database (if created locally)
+*.sqlite3
+*.db
+
+# Media uploads / audio (if created by app)
+media/
+uploads/
+*.mp3
+*.wav
+*.flac
+*.ogg
+
+# Node modules
+node_modules/
